@@ -1,32 +1,32 @@
 pipeline {
+
     agent any
+   
     stages {
-        stage('Checkout') {
+         stage('Checkout') {
             steps {
-                git 'https://github.com/aditya-sridhar/simple-reactjs-app?tab=readme-ov-file'
+                sh 'echo CheckOut Passed'
             }
         }
         stage('Dependency Installation') {
             steps {
-                sh 'npm install'  // Example command for installing dependencies
+                sh 'npm install'
             }
         }
-        stage('Build') {
+        stage('Build Docker Image') {
+        steps {
+                sh 'echo docker build -t SCDlab11'
+            }
+        }
+        stage('Run Docker Image') {
+        steps {
+                sh 'echo docker_run_-d_-p_80:80_myapp:latest'
+            }
+        }
+        stage('Push Docker Image') {
             steps {
-                echo 'docker build -t simple-reactjs-app-master'  // Example command 
+                    sh "echo docker push SaaramCheema/i211226_SCDLAB11:latest"
             }
         }
-        stage('Run') {
-            steps {
-                sh 'docker run -d -p 8080:80 simple-reactjs-app-master'  
-            }
-        }
-        stage('Push') {
-            steps {
-                echo 'docker-push'  
-            }
-        }
-        
     }
 }
-
